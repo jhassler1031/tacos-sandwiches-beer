@@ -10,6 +10,8 @@ class JohnsData extends Component {
     };
 
     this._postData = this._postData.bind(this);
+    this._editData = this._editData.bind(this);
+    this._delData = this._delData.bind(this);
 
   }
 
@@ -25,6 +27,7 @@ class JohnsData extends Component {
       return response.json();
     })
     .then((responseAsJson)=>{
+      console.log(responseAsJson);
       self.setState({johnsData: responseAsJson});
     })
     .catch((error)=>{
@@ -55,10 +58,56 @@ class JohnsData extends Component {
     });
   }
 
+  // PUT method ================================================================
+  _editData() {
+    let id = "5b47978d0ce3c40004fea5c5";
+
+    let context = {
+      beerName: "Natty Light",
+      type: "Piss Water",
+      whereItBelongs: "In the toilet"
+    };
+
+    fetch(`http://tiny-lasagna-server.herokuapp.com/collections/johnhassler/${id}`,{
+      method: "PUT",
+      body: JSON.stringify(context),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log('Looks like there was an error: \n', error);
+    });
+  }
+
+  // DELETE Method =============================================================
+  _delData() {
+    let id = "5b47bd0ed881000004127e35";
+    // let beers = this.state.data;
+
+    fetch(`http://tiny-lasagna-server.herokuapp.com/collections/johnhassler/${id}`,{
+      method: "DELETE",
+    })
+    .then(function(response) {
+      console.log(response);
+    })
+    .catch(function(error) {
+      console.log('Looks like there was an error: \n', error);
+    });
+
+    // beers.splice(beers.indexOf(id), 1);
+    // this.setState({beers});
+  }
+
+  // Render ====================================================================
   render() {
+    let self = this;
     let $beers = this.state.johnsData.map((beer)=>{
       return (
-        <Beer key={beer._id} beer={beer}/>
+        <Beer key={beer._id} beer={beer} />
       );
     })
 
@@ -67,6 +116,8 @@ class JohnsData extends Component {
         <p>John's Beer List</p>
         {$beers}
         <input type="button" value="Add Beer" onClick={this._postData}/>
+        <input type="button" value="Edit Beer" onClick={this._editData}/>
+        <input type="button" value="Delete Beer" onClick={this._delData}/>
       </div>
     );
   }

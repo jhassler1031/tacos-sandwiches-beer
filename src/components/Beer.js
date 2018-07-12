@@ -5,6 +5,7 @@ class Beer extends Component {
     super(props);
   }
 
+
   render() {
     return (
       <div className="beer">
