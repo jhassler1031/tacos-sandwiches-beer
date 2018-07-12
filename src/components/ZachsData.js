@@ -1,24 +1,20 @@
 import React, { Component } from 'react';
 
-class JohnsData extends Component {
+class ZachsData extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      johnsData: []
+      zachsData: []
     };
 
   }
 
-  componentDidMount() {
-    let self = this;
-  }
-
   render() {
     return (
-      <p>John's Data</p>
+      <div>Zach's Data</div>
     );
   }
 }
 
-export default JohnsData;
+export default ZachsData;
