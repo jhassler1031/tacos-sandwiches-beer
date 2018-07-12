@@ -84,9 +84,9 @@ class JohnsData extends Component {
   }
 
   // DELETE Method =============================================================
-  _delData() {
-    let id = "5b47bd0ed881000004127e35";
-    // let beers = this.state.data;
+  _delData(beer) {
+    let id = beer._id; //"5b47bd0ed881000004127e35";
+    let beers = this.state.johnsData;
 
     fetch(`http://tiny-lasagna-server.herokuapp.com/collections/johnhassler/${id}`,{
       method: "DELETE",
@@ -98,8 +98,8 @@ class JohnsData extends Component {
       console.log('Looks like there was an error: \n', error);
     });
 
-    // beers.splice(beers.indexOf(id), 1);
-    // this.setState({beers});
+    beers.splice(beers.indexOf(beer), 1);
+    this.setState({beers});
   }
 
   // Render ====================================================================
@@ -107,7 +107,7 @@ class JohnsData extends Component {
     let self = this;
     let $beers = this.state.johnsData.map((beer)=>{
       return (
-        <Beer key={beer._id} beer={beer} />
+        <Beer key={beer._id} beer={beer} delBeer={()=>{self._delData(beer)}}/>
       );
     })
 
@@ -117,7 +117,7 @@ class JohnsData extends Component {
         {$beers}
         <input type="button" value="Add Beer" onClick={this._postData}/>
         <input type="button" value="Edit Beer" onClick={this._editData}/>
-        <input type="button" value="Delete Beer" onClick={this._delData}/>
+        {/* <input type="button" value="Delete Beer" onClick={this._delData}/> */}
       </div>
     );
   }

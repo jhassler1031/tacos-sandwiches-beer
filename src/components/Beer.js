@@ -12,6 +12,7 @@ class Beer extends Component {
         <p>Name: {this.props.beer.beerName}</p>
         <p>Type: {this.props.beer.type}</p>
         <p>This beer belongs here: {this.props.beer.whereItBelongs}</p>
+        <input type="button" value="Delete Beer" onClick={this.props.delBeer}/>
       </div>
     );
   }
