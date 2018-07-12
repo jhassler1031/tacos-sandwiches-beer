@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Beer from './Beer.js';
 
 class JohnsData extends Component {
   constructor(props) {
@@ -34,9 +35,9 @@ class JohnsData extends Component {
   // POST method ===============================================================
   _postData() {
     let context = {
-      beerName: "New Belgium la Folie",
-      type: "Pure Awesome",
-      whereItBelongs: "In ma belly!"
+      beerName: "PBR",
+      type: "Piss Water",
+      whereItBelongs: "In the toilet"
     };
 
     fetch('http://tiny-lasagna-server.herokuapp.com/collections/johnhassler',{
@@ -55,9 +56,16 @@ class JohnsData extends Component {
   }
 
   render() {
+    let $beers = this.state.johnsData.map((beer)=>{
+      return (
+        <Beer key={beer._id} beer={beer}/>
+      );
+    })
+
     return (
       <div className="johnsPage">
-        <p>John's Data</p>
+        <p>John's Beer List</p>
+        {$beers}
         <input type="button" value="Add Beer" onClick={this._postData}/>
       </div>
     );
