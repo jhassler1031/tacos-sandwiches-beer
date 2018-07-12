@@ -37,6 +37,7 @@ class JohnsData extends Component {
 
   // POST method ===============================================================
   _postData() {
+    let beers = this.state.johnsData;
     let context = {
       beerName: "PBR",
       type: "Piss Water",
@@ -56,6 +57,9 @@ class JohnsData extends Component {
     .catch((error)=>{
       console.log("There was a problem: \n", error);
     });
+
+    beers.unshift(context);
+    this.setState(beers);
   }
 
   // PUT method ================================================================
